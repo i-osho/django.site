@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+
+        }
+    
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+        
+    </style>
+    {% if type == "Resident's Data" %}
+        <a class="url" href="{% url 'home' %}">&lt;&lt; Home</a>
+    {% else %}
+        <a class="url" href="{% url 'adminhome' %}">&lt;&lt; Back</a>
+    {% endif %}
+    <div class="table-box">
+        <h2>{{type}}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for column, value in column_value_pairs %}
+                <tr>
+                    <td>{{ column }}</td>
+                    {% if 'Date' in column %}
+                    <td>{{ value|date:"Y-m-d" }}</td>
+                    {% else %} 
+                    <td>{{ value }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>{{type}}</title>
+<h3>You want to delete record for ID/DU No: {{USERID}}</h3>
+<style>
+    .button-group {
+    display: flex;
+    margin-right: 10px;
+    justify-content: flex-left;
+    align-items: left;
+    }
+    .button-group form, .button-group a {
+    margin-right: 50px;
+    }
+</style>
+<div class="button-group">
+    <form action="{% url 'success' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="delete" value="true">
+        <button type="submit" class="btn submit-btn">Yes</button>
+    </form>
+    <form action="{% url 'adminhome' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden">
+        <button type="submit" class="btn submit-btn">No</button>
+    </form>
+</div>
+{% endblock %}

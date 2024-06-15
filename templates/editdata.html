@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>     
+        .edit-container {
+            width: 70%;
+            margin: 50px auto;
+            padding: 20px;
+        }
+    
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+    
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+    
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    
+        input[readonly] {
+            background-color: #e9e9e9;
+        }
+
+        .edit-btn-container {
+            text-align: center;  /* Center the button container */
+            margin-top: 20px;  /* Optional: Add some space above the button */
+        }
+        .edit-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+    
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    {% if type == 'Edit Data' %}
+        <a class="url" href="{% url 'home' %}">&lt;&lt; Home</a>
+    {% else %}
+        <a class="url" href="{% url 'adminhome' %}">&lt;&lt; Back</a>
+    {% endif %}
+
+    <div class="edit-container">
+        <h2>{{type}}</h2>
+        <form action="{% url 'success' %}" method="POST">
+            {% csrf_token %}
+
+            {% for column, value in column_value_pairs %}
+                <label for="{{column}}">{{column}}</label>
+                {% if type == 'Edit Data' %}
+                    {% if column == 'DU No' or column == 'ID' or column == 'Resident Class' or column == 'Resident Name' or column == 'IRWO PM Number' or column == 'Scheme Reg No' or column == 'Mobile Phone' or column == 'Allotment Date' %}
+                            {% if 'Date' in column %}
+                                <input type="date" name="{{column}}" value="{{value|date:'Y-m-d'}}" readonly="true"><br>
+                            {% else %}
+                                <input type="text" name="{{column}}" value="{{value}}" readonly="true"><br>
+                            {% endif %}
+                    {% elif 'Date' in column %}
+                        <input type="date" name="{{column}}" value="{{value|date:'Y-m-d'}}"><br>
+                    {% elif 'username' in column %}
+                        <input type="text" name="{{column}}" value="{{value}}" required><br>
+                    {% else %}
+                        <input type="text" name="{{column}}" value="{{value}}"><br>
+                    {% endif %}
+                {% else %}
+                    {% if column == 'DU No' or column == 'ID' %}
+                        <input type="text" name="{{column}}" value="{{value}}" readonly="true"><br>
+                    {% elif 'Date' in column %}
+                        <input type="date" name="{{column}}" value="{{value|date:'Y-m-d'}}"><br>
+                    {% elif 'username' in column %}
+                        <input type="text" name="{{column}}" value="{{value}}" required><br>
+                    {% else %}
+                        <input type="text" name="{{column}}" value="{{value}}"><br>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <div class="edit-btn-container">
+                <button type="submit" class="edit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

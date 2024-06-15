@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="text-align: center;">
+
+    <h2>About Our Housing Society</h2>
+    <p>Welcome to our housing society. We are committed to providing a safe and comfortable living environment for all our residents. Join us to experience the best community living with top-notch facilities and services.</p>
+    <div class="buttons">
+        <a href="{% url 'login' %}">Resident Login</a>
+        <a href="{% url 'adminlogin' %}">Admin Login</a>
+    </div>
+</div>
+    
+{% endblock %}

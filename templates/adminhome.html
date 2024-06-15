@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>{{type}}</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    h3 {
+        text-align: center;
+        color: #333;
+    }
+
+    .nav {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color: #007BFF;
+        margin: 0 15px;
+        font-size: 18px;
+    }
+
+    .nav a:hover {
+        text-decoration: underline;
+    }
+</style>
+<a class="url" href="{% url 'getid' %}">&lt;&lt; Search ID</a>
+<h3>{{type}}</h3>
+<div class="nav">
+    <h4>{{USERID}} selected</h4><br>
+    <a href="{% url 'userdata' %}">View Data</a>
+    •
+    <a href="{% url 'editdata' %}">Edit Data</a>
+    •
+    <a href="{% url 'deletedata' %}">Delete Data</a>
+</div>
+
+</html>
+
+{% endblock %}
