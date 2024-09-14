@@ -60,7 +60,7 @@ def editdata(request):
     global USERNAME, PASSWORD, USERID
     records = get_data(USERNAME, PASSWORD, USERID)
     column_value_pairs = zip(columns, records)
-    TYPE = "Resident's Data" if USERID == None else f"Resident's Data with ID/DU No {USERID}"
+    TYPE = "Edit Data" if USERID == None else f"Editing Resident's Data with ID/DU No {USERID}"
     return render(request, 'editdata.html', {'column_value_pairs': column_value_pairs, 'type':TYPE})
 
 def success(request):
@@ -70,8 +70,7 @@ def success(request):
         with connection.cursor() as cursor:
             cursor.execute("DELETE FROM residents WHERE `ID` = %s", [USERID])
     else:
-        s = _()
-        ID = s.lrstrip.request.POST.get('ID')
+        ID = request.POST.get('ID')
         DU_No = request.POST.get('DU No')
         Resident_Class = request.POST.get('Resident Class')
         Resident_Name = request.POST.get('Resident Name')

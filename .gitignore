@@ -1,2 +1,8 @@
 /.vscode
-/testpage
+*.pyc
+output_file.sql
+rvsite.sql
+task1/__pycache__
+testpage/__pycache__
+*.cpython-311.pyc
+*/migrations

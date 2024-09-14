@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-&=p=26yir&-!fqqswz!06w)z$zx%h8a)=ux_m#srmnx&k1qzh7"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.1.10']
+ALLOWED_HOSTS = ['*']
 
 # LOGGING = {
 #     'version': 1,
@@ -95,7 +95,7 @@ WSGI_APPLICATION = "task1.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'testing',
+        'NAME': 'rv',
         'USER': 'osho',
         'PASSWORD': 'osho',
         'HOST': 'localhost',  # or the hostname where your MySQL server is running
